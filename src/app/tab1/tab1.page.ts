@@ -9,8 +9,15 @@ import { Marcador } from '../class/marcador';
 export class Tab1Page {
   
   marcadores : Marcador[] = [];
-  lat = 4.60972222222;
+  lat = 4.60972222222;  
   lng = -74.0816666667;
+  paths: Array<any> = [];
+  polygon = false;
+  latA : number;
+  latB : number;
+  lngA : number;
+  lngB : number;
+  polyline = false;
 
   constructor(){
     const nuevoMarcador = new Marcador(4.60972222222, -74.0816666667)
@@ -22,9 +29,25 @@ export class Tab1Page {
     console.log(evento);
     console.log(evento.coords.lat);
     console.log(evento.coords.lng);
-    const nuevoMarcador = new Marcador(evento.coords.lat, evento.coords.lng);
+    const nuevoMarcador = new Marcador(parseFloat(evento.coords.lat), parseFloat(evento.coords.lng));
     this.marcadores.push(nuevoMarcador);
 
+    console.log(this.marcadores.length);
+     if(this.marcadores.length>=3){
+      this.paths=this.marcadores;
+      this.polygon=true;
+     if(this.marcadores.length==4)
+      {
+        this.latA = parseFloat(evento.coords.lat);
+        this.lngA = parseFloat(evento.coords.lng);
+      }
+     if(this.marcadores.length==5)
+     {
+       this.latB = parseFloat(evento.coords.lat);
+       this.lngB = parseFloat(evento.coords.lng);
+       this.polyline = true;
+     }
+    }
   }
 
 }

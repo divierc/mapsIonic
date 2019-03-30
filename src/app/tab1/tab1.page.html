@@ -9,18 +9,26 @@
 <ion-content>
     <ion-card class="welcome-card">
       <ion-card-header>
-        <ion-card-title> {{ title }}</ion-card-title>
+        <ion-card-title> Mapa de parque</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <!-- this creates a google map on the page with the given lat/lng from -->
         <!-- the component as the initial center of the map: -->  
-        <agm-map (mapClick)="agregarMarcador($event)" [latitude]="lat" [longitude]="lng" [zoom]='15'>
-          <agm-marker *ngFor="let marcador of marcadores" [latitude]="marcador.lat" [longitude]="marcador.lng">
+        <agm-map (mapClick)="agregarMarcador($event)" [latitude]="lat" [longitude]="lng" [zoom]='16'>
+          <agm-marker *ngFor="let marcador of marcadores" [latitude]="marcador.lat" [longitude]="marcador.lng" iconUrl="assets/location1.png" width="50%">
               <agm-info-window>
                 <strong>{{marcador.title}}</strong>
                 <p>{{marcador.description}}</p>
               </agm-info-window>
           </agm-marker>
+           <agm-polygon *ngIf="polygon"  [paths]="paths" fillColor="#97DE8F" strokeColor="#32682C">
+          </agm-polygon>
+          <agm-polyline *ngIf="polyline" strokeColor="#125F0A" >
+            <agm-polyline-point [latitude]="latA" [longitude]="lngA">
+            </agm-polyline-point>
+            <agm-polyline-point [latitude]="latB" [longitude]="lngB">
+            </agm-polyline-point>
+        </agm-polyline>
         </agm-map>
       </ion-card-content>
     </ion-card>
