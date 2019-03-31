@@ -1,11 +1,13 @@
 export class Marcador {
-    public title: string = 'Sin titulo';
-    public description : string = 'Sin descripción'
-    public lat : number = 4.60972222222;
-    public lng : number = -74.0816666667;
+    public title: string;
+    public description : string;
+    public lat : number;
+    public lng : number;
 
-    constructor(lat : number, lng : number){
+    constructor(lat : number, lng : number, title : string, description : string){
         this.lat = lat,
-        this.lng = lng
+        this.lng = lng,
+        this.title = title,
+        this.description = description
     }
 }
