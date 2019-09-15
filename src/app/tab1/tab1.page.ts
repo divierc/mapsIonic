@@ -12,9 +12,17 @@ export class Tab1Page implements OnInit {
   {
     this.polygon = false;
     this.polyline = false;
-    this.storage.get('marker').then((val) => 
+    this.storage.get('marker1').then((val) => 
     {
       let marcador : Marcador = JSON.parse(val);
+      
+      // for (let i in marcador) {
+      //   if (parseInt(i) > 4) {
+      //     marcador = null;
+      //   }
+      // }
+
+      
       for (let i in marcador)
       {
         this.marcadores.push(marcador[i]);
@@ -36,6 +44,7 @@ export class Tab1Page implements OnInit {
           this.polyline = true;
         }
       }        
+    
     });
   }
   ingresarMarcador(lat, lng, title, description){
@@ -58,26 +67,31 @@ export class Tab1Page implements OnInit {
 
   agregarMarcador(evento){
     this.ingresarMarcador(parseFloat(evento.coords.lat), parseFloat(evento.coords.lng), evento.coords.title, evento.coords.description);
-    //Almacenamiento en local storage
-    this.storage.set('marker', JSON.stringify(this.marcadores) );
+    // Almacenamiento en local storage
+    this.storage.set('marker1', JSON.stringify(this.marcadores) );
     console.log(this.marcadores.length);
-    //Creación del polígono
-     if(this.marcadores.length>=3){
-      this.paths=this.marcadores;
-      this.polygon=true;
-    //Creación de la línea
-     if(this.marcadores.length==4)
-      {
+    // Creación del polígono
+     if(this.marcadores.length >= 3) {
+      this.paths = this.marcadores;
+      this.polygon = true;
+    // Creación de la línea
+     if ( this.marcadores.length = 4) {
         this.latA = parseFloat(evento.coords.lat);
         this.lngA = parseFloat(evento.coords.lng);
       }
-     if(this.marcadores.length==5)
-     {
+     if ( this.marcadores.length = 5) {
        this.latB = parseFloat(evento.coords.lat);
        this.lngB = parseFloat(evento.coords.lng);
        this.polyline = true;
      }
+    //  if ( this.marcadores.length > 8) {
+    //   this.marcadores.length = 0;
+    //  }
     }
   }
+
+  clearOverlays() {
+    this.marcadores.length = 0;
+    }
 
 }

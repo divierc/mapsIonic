@@ -1,25 +1,21 @@
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-
-import { IonicModule } from '@ionic/angular';
-
 import { Tab4Page } from './tab4.page';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: Tab4Page
-  }
-];
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
+    IonicModule,
     CommonModule,
     FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild([{ path: '', component: Tab4Page }]),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB2g5cFRZ6Cr6ozLb9hv6kow_Id066HQmo'
+    })
   ],
   declarations: [Tab4Page]
 })
